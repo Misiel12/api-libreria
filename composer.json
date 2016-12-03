@@ -1,0 +1,11 @@
+{
+    "name": "demo/demo",
+    "description": "proyecto demo",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "RC",
+    "require": {
+        "slim/slim": "^3.0",
+        "monolog/monolog": "^1.22"
+    }
+}

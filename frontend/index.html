@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+<script>
+
+var promise = $.get('http://localhost:80/api/libros');
+
+promise.done(function (response, xhr) {
+    console.log(response)
+});
+
+
+promise.error(function (response, xhr) {
+
+});
+
+
+</script>
+
+
+
+
+</body>
+</html>
