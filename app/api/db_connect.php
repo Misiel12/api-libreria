@@ -14,7 +14,7 @@ function getConnection()
     $user = "root";
     $pass = "";
     $db_name = "demo";
-  // return new mysqli($host, $user, $pass, $db_name);
+
     try {
         $conn = new PDO("mysql:host=$host;dbname=$db_name", $user, $pass);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

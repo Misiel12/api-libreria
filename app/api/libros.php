@@ -5,17 +5,15 @@
  * Date: 29/11/2016
  * Time: 10:52
  */
-
 //recupera todos los libros
 $app->get('/api/libros', function ($req, $res) {
-    // require_once('db_connect.php'); // se manda llamas la clase db_connect
-    // se intenta hacer la llamada
-    $queryString = $req->getQueryParams();
-    $offset = isset($queryString['offset']) ? $queryString['offset']  : 0;
-    $limit = isset($queryString['limit']) ? $queryString['limit']  : 2;
 
-    $autor = isset($queryString['autor']) ? $queryString['autor']  : null;
-    $search = isset($queryString['search']) ? $queryString['search']  : null;
+    $queryString = $req->getQueryParams();
+    $offset = isset($queryString['offset']) ? $queryString['offset'] : 0;
+    $limit = isset($queryString['limit']) ? $queryString['limit'] : 2;
+
+    $autor = isset($queryString['autor']) ? $queryString['autor'] : null;
+    $search = isset($queryString['search']) ? $queryString['search'] : null;
 
     try {
 
@@ -23,19 +21,19 @@ $app->get('/api/libros', function ($req, $res) {
         $count = "select count(*) as count from libros where 1=1 ";
 
 
-        if($search) {
+        if ($search) {
             $query .= " and autor like '%" . $search . "%' or titulo_libro like  '%" . $search . "%'  ";
             $count .= " and autor like '%" . $search . "%' or titulo_libro like  '%" . $search . "%'  ";
         }
 
-        if($autor) {
+        if ($autor) {
             $query .= " and autor =" . $autor . " ";
             $count .= " and autor =" . $autor . " ";
         }
 
 
         if ($limit) {
-            $query .= " LIMIT  " . $limit ." ";
+            $query .= " LIMIT  " . $limit . " ";
 
         }
 
@@ -57,7 +55,7 @@ $app->get('/api/libros', function ($req, $res) {
     }
 
 
-    return $res->withJSON(['rows'=>$data,'total'=>$cant->count]); // si sale bien regresa los datos como JSON
+    return $res->withJSON(['rows' => $data, 'total' => $cant->count]); // si sale bien regresa los datos como JSON
 });
 
 
@@ -75,7 +73,7 @@ $app->get('/api/libros/{id}', function ($request, $response) {
 
         //$result = $conn->query($query);
         $data = $conn->query($query)->fetchAll();// se toma el dato recuperado
-       // $data = $result->fetch_assoc();
+        // $data = $result->fetch_assoc();
         if (!$data)
             throw  new Exception("No se pudo recuperar info");
 
@@ -117,7 +115,7 @@ $app->post('/api/libros', function ($request, $response, $args) use ($app) {
     }
 
 
-    $last_id = $conn->lastInsertId( );
+    $last_id = $conn->lastInsertId();
 
     if (!empty($last_id))
         echo $last_id;
@@ -149,14 +147,12 @@ $app->put('/api/libros/{id}', function ($request, $response, $args) {
         if ($data === FALSE)
             throw  new Exception("No se pudo recuperar info");
         $conn->commit();
-       // echo $conn->rowCount() . " records UPDATED successfully";
+        // echo $conn->rowCount() . " records UPDATED successfully";
 
     } catch (Exception $e) {
         $conn->rollback();
         return $response->withJSON(['error' => $e->getMessage()], 500);
     }
-
-
 
 
     return $response->withJSON(['success'], 200);
@@ -167,7 +163,6 @@ $app->put('/api/libros/{id}', function ($request, $response, $args) {
 
 // se borra un libro
 $app->delete('/api/libros/{id}', function ($request, $response, $args) {
-
 
 
     $id = $request->getAttribute('id');
@@ -187,7 +182,6 @@ $app->delete('/api/libros/{id}', function ($request, $response, $args) {
         $conn->rollback();
         return $response->withJSON(['error' => $e->getMessage()], 500);
     }
-
 
 
     return $response->withJSON(['id' => $id], 200);
