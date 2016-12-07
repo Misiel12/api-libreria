@@ -6,6 +6,8 @@
     "minimum-stability": "RC",
     "require": {
         "slim/slim": "^3.0",
-        "monolog/monolog": "^1.22"
+        "monolog/monolog": "^1.22",
+        "firebase/php-jwt": "^4.0",
+        "tuupola/slim-jwt-auth": "^2.3"
     }
 }

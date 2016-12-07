@@ -7,11 +7,14 @@
  */
 
 
-require  __DIR__."../../vendor/autoload.php";
+require __DIR__ . "../../vendor/autoload.php";
+//require __DIR__ . '../../app/loader.php';
+require __DIR__ . '../../app/api/JWT.php';
+require __DIR__ . '../../app/api/db_connect.php';
+require __DIR__ . '../../app/controllers/Libros.php';
+require __DIR__ . '../../app/controllers/auth.php';
+require __DIR__ . '../../app/middleware/verifyToken.php';
 
-require  __DIR__."../../controllers/Customers.php";
-
-require __DIR__.'../../app/api/db_connect.php';
 $config = [
     'settings' => [
         'displayErrorDetails' => true,
@@ -19,11 +22,6 @@ $config = [
 ];
 
 $app = new Slim\App($config);
-
-
-$app->get("/", function(){
-    return "hola mundo";
-});
 
 $app->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
@@ -33,20 +31,11 @@ $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
         ->withHeader('Access-Control-Allow-Origin', 'http://localhost:63342')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, X-Token, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
 
-require_once("../app/api/libros.php");
-require_once("../app/api/generos.php");
-
-
-
-$app->get("/customers", "Demo\Customers:getAll");
-$app->get('/hola/{name}',"Demo\Customers:hola");
-
-
-
+require __DIR__ . '../../app/rutas.php';
 
 $app->run();

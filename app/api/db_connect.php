@@ -5,24 +5,29 @@
  * Date: 29/11/2016
  * Time: 11:17
  */
+namespace LIBRERIA\API;
 
-class Conecction{
+use \PDO;
 
-function getConnection()
+class Conecction
 {
-    $host = "localhost";
-    $user = "root";
-    $pass = "";
-    $db_name = "demo";
 
-    try {
-        $conn = new PDO("mysql:host=$host;dbname=$db_name", $user, $pass);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        //$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    }catch (PDOException $e){
-         throw  new Exception($e->getMessage(), $e->getCode());
+    function getConnection()
+    {
+        $host = "localhost";
+        $user = "root";
+        $pass = "";
+        $db_name = "demo";
+
+        try {
+            $conn = new PDO("mysql:host=$host;dbname=$db_name", $user, $pass);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+            //$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        } catch (PDOException $e) {
+            throw  new Exception($e->getMessage(), $e->getCode());
+        }
+
+        return $conn;
     }
-
-    return $conn;
-}}
+}
