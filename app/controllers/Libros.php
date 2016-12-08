@@ -17,7 +17,7 @@ class Libros
     {
         $queryString = $req->getQueryParams();
         $offset = isset($queryString['offset']) ? $queryString['offset'] : 0;
-        $limit = isset($queryString['limit']) ? $queryString['limit'] : 3;
+        $limit = isset($queryString['limit']) ? $queryString['limit'] : 6;
         $autor = isset($queryString['autor']) ? $queryString['autor'] : null;
         $search = isset($queryString['search']) ? $queryString['search'] : null;
         try {
