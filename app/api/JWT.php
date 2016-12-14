@@ -23,7 +23,7 @@ class Token
             $payload = [
                 "iss" => 'ali@gmail.com',
                 "iat"=>time(),
-                "exp" => time() + ( 5 * 60),
+                "exp" => time() + ( 10 * 60),
                 "data" => $data
             ];
 
