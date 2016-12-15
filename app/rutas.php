@@ -20,3 +20,4 @@ $app->group('/api/libros', function () use ($app) {
 })->add( new \LIBRERIA\MIDDLEWARE\verifyToken());
 
 $app->post('/login', 'LIBRERIA\API\auth::Login');
+$app->post('/registro', 'LIBRERIA\API\auth::Login');
