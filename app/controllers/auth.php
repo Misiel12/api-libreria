@@ -67,15 +67,16 @@ class auth
 
         $payload = $client->verifyIdToken($body->idtoken);
 
+
+
         if ($payload) {
             $userid = $payload['sub'];
-
 
         $token = array(
 
 
-                "nombre" => $body->nombre ,
-                "correo" => $body->correo
+
+                "payload" => $payload
 
 
         );
@@ -87,6 +88,7 @@ class auth
 
         $data["status"] = "ok";
         $data["user"] = $userid;
+        $data["payload"] = $payload;
         $data["token"] = $jwt;
 
 
