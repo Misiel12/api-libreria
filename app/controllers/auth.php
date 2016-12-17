@@ -22,8 +22,10 @@ class auth
 
 
     public function Login($request, $response, $args)
-{
+{   //555   //5554
      $CLIENT_ID = "216891072974-oklh71pp1olj7pk36hiinp6r15epf0qu.apps.googleusercontent.com";
+    $CLIENT_SECRET = "u2Qk_bet514hqTQQ-F_mElpn";
+    $Api = 'AIzaSyBXHl9VzcVAMmtEdDjWYoN8-iTHTftqF-s';
     // se obtiene el body
     $json = $request->getBody();
 
@@ -63,7 +65,7 @@ class auth
 //
 //       // $data["token"]=$sign->verify('eydadss.assdasd.asdasd');
 
-        $client = new \Google_Client(['client_id' => $CLIENT_ID]);
+        $client = new \Google_Client(['client_id' => $CLIENT_ID,'client_secret'=> $CLIENT_SECRET,'developer_key' => $Api ]);
 
         $payload = $client->verifyIdToken($body->idtoken);
 
